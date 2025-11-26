@@ -1,0 +1,252 @@
+.result-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 20px;
+}
+
+.result-container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Result Hero */
+.result-hero {
+  margin-bottom: 32px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-emoji {
+  font-size: 80px;
+  display: block;
+  margin-bottom: 16px;
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.result-hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.result-hero.win h1 {
+  color: #10b981;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.result-hero.lose h1 {
+  color: #ef4444;
+}
+
+.result-hero.draw h1 {
+  color: #fbbf24;
+}
+
+.result-detail {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Final Board */
+.final-board {
+  margin-bottom: 28px;
+  animation: fadeIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.final-board h3 {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 12px 0;
+}
+
+.board-mini {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.cell-mini {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.cell-mini.X {
+  color: #3b82f6;
+}
+
+.cell-mini.O {
+  color: #ef4444;
+}
+
+/* Game Stats */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.stat-value.symbol {
+  font-size: 28px;
+}
+
+.stat-value.symbol.X {
+  color: #3b82f6;
+}
+
+.stat-value.symbol.O {
+  color: #ef4444;
+}
+
+.stat-value.win {
+  color: #10b981;
+}
+
+.stat-value.lose {
+  color: #ef4444;
+}
+
+.stat-value.draw {
+  color: #fbbf24;
+}
+
+/* Actions */
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  animation: fadeIn 0.5s ease-out 0.4s both;
+}
+
+.action-btn {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-btn.primary {
+  color: white;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+.action-btn.secondary {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+/* Motivation */
+.motivation {
+  animation: fadeIn 0.5s ease-out 0.5s both;
+}
+
+.motivation p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .result-emoji {
+    font-size: 64px;
+  }
+
+  .result-hero h1 {
+    font-size: 28px;
+  }
+
+  .cell-mini {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .game-stats {
+    gap: 24px;
+    padding: 16px;
+  }
+}
