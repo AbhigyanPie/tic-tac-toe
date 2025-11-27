@@ -1,68 +1,159 @@
+# 🎮 Multiplayer Tic-Tac-Toe
 
-# Getting Started with Create React App
+A production-ready, real-time multiplayer Tic-Tac-Toe game built with **React** and **Nakama** game server.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Game Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![React](https://img.shields.io/badge/React-18.x-61DAFB?logo=react) ![Nakama](https://img.shields.io/badge/Nakama-3.24.2-purple)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌐 Live Demo
 
-### `npm start`
+| Service | URL |
+|---------|-----|
+| 🎮 **Game** | [http://ec2-34-228-198-235.compute-1.amazonaws.com](http://ec2-34-228-198-235.compute-1.amazonaws.com) |
+| 🔧 **Nakama API** | [http://ec2-34-228-198-235.compute-1.amazonaws.com:7350](http://ec2-34-228-198-235.compute-1.amazonaws.com:7350) |
+| 📊 **Nakama Console** | [http://ec2-34-228-198-235.compute-1.amazonaws.com:7351](http://ec2-34-228-198-235.compute-1.amazonaws.com:7351) |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Features
 
-### `npm test`
+### Core Features
+- ✅ **Real-time Multiplayer** - Play against other players in real-time
+- ✅ **Server-Authoritative Logic** - All game logic validated server-side
+- ✅ **Automatic Matchmaking** - Find opponents automatically
+- ✅ **WebSocket Communication** - Low-latency game updates
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Bonus Features
+- 🏆 **Leaderboard System** - Track wins, losses, and rankings
+- ⏱️ **Timed Mode** - 30-second turn timer for fast-paced games
+- 📊 **Player Statistics** - Track your performance over time
+- 🔄 **Reconnection Handling** - Graceful disconnect handling
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🏗️ Architecture
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+┌─────────────────┐         ┌─────────────────┐         ┌─────────────────┐
+│                 │   HTTP  │                 │   SQL   │                 │
+│  React Client   │◄───────►│  Nakama Server  │◄───────►│   PostgreSQL    │
+│  (Frontend)     │   WS    │  (Game Logic)   │         │   (Database)    │
+│                 │         │                 │         │                 │
+└─────────────────┘         └─────────────────┘         └─────────────────┘
+        │                           │
+        │                           │
+        ▼                           ▼
+   Port 80 (HTTP)            Port 7350 (API)
+                             Port 7351 (Console)
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Server-Authoritative Design
 
-### `npm run eject`
+All game logic runs on the Nakama server to prevent cheating:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Move Validation** - Server validates every move before applying
+2. **Win Detection** - Server determines game outcomes
+3. **Turn Management** - Server controls whose turn it is
+4. **State Broadcasting** - Server broadcasts verified state to all clients
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🚀 Quick Start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Prerequisites
+- Node.js 18+
+- Docker & Docker Compose
+- AWS Account (for deployment)
 
-## Learn More
+### Local Development
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**1. Clone the repository**
+```bash
+git clone https://github.com/yourusername/multiplayer-tictactoe.git
+cd multiplayer-tictactoe
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**2. Start the backend**
+```bash
+cd backend
+docker-compose up -d
+```
 
-### Code Splitting
+**3. Start the frontend**
+```bash
+cd frontend
+npm install
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**4. Open the game**
+```
+http://localhost:3000
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🧪 Testing Multiplayer
 
-### Making a Progressive Web App
+To test the multiplayer functionality:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Open the game in **Chrome**: `http://ec2-34-228-198-235.compute-1.amazonaws.com`
+2. Open the same URL in **Chrome Incognito** (or another browser)
+3. Login as `player1` in one window, `player2` in the other
+4. Click **"Find Opponent"** in both windows
+5. Wait for matchmaking to pair you (usually ~25 seconds)
+6. Play the game!
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📁 Project Structure
 
-### Deployment
+```
+multiplayer-tictactoe/
+├── backend/
+│   ├── docker-compose.yml    # Container orchestration
+│   ├── nakama.yml            # Nakama configuration
+│   └── modules/
+│       └── main.js           # Server-side game logic
+├── frontend/
+│   ├── src/
+│   │   ├── components/       # React components
+│   │   ├── screens/          # Game screens
+│   │   ├── services/
+│   │   │   └── nakama.js     # Nakama client SDK
+│   │   └── styles/           # CSS files
+│   └── public/
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | React 18, CSS3 |
+| Backend | Nakama 3.24.2 |
+| Database | PostgreSQL 13 |
+| Deployment | AWS EC2, Nginx |
+| Container | Docker, Docker Compose |
+
+---
+
+## 📖 Documentation
+
+- [Backend README](./backend/README.md) - Server setup and API docs
+- [Frontend README](./frontend/README.md) - Client setup and components
+
+---
+
+## 📄 License
+
+This project is built as an assignment for **LILA Games**.
+
+---
+
+<p align="center">
+  Made with ❤️ for LILA Games
+</p>
